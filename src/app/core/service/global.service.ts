@@ -8,7 +8,8 @@ import {catchError} from "rxjs/operators";
 })
 export class GlobalService {
 
-  public baseUrl = "http://localhost:8080";
+  // public baseUrl = "http://localhost:8080";
+  public baseUrl = 'https://odcactivituy.onrender.com';
 
   constructor(private http: HttpClient) {}
 

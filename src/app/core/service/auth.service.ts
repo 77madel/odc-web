@@ -10,7 +10,8 @@ import {Utilisateur} from "@core/models/Utilisateur";
   providedIn: 'root',
 })
 export class AuthService {
-  private BASE_URL = 'http://localhost:8080';
+  // private BASE_URL = 'http://localhost:8080';
+  private BASE_URL =  'https://odcactivituy.onrender.com' ;
   currentUserSubject: BehaviorSubject<Utilisateur & { roles: string[] }>;
   public currentUser: Observable<Utilisateur & { roles: string[] }>;
 

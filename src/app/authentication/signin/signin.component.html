@@ -16,18 +16,34 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="form-group position-relative">
-                      <label>Your Email <span class="text-danger">*</span></label>
+                      <label>Votre Email <span class="text-danger">*</span></label>
                       <i-feather name="user" class="login-icons"></i-feather>
                       <input type="email" class="form-control psl-5" formControlName="username" placeholder="Email">
                       </div>
+                    <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+                      <small class="text-danger" *ngIf="loginForm.get('username')?.errors?.['required']">
+                        L'email est requis.
+                      </small>
+                      <small class="text-danger" *ngIf="loginForm.get('username')?.errors?.['email']">
+                        Format d'email invalide.
+                      </small>
                     </div>
+                  </div>
                     <div class="col-lg-12">
                       <div class="form-group position-relative">
-                        <label>Password <span class="text-danger">*</span></label>
+                        <label>Mot de Passe <span class="text-danger">*</span></label>
                         <i-feather name="key" class="login-icons"></i-feather>
                         <input type="password" class="form-control psl-5" formControlName="password"
                           placeholder="Password">
                         </div>
+                      <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+                        <small class="text-danger" *ngIf="loginForm.get('password')?.errors?.['required']">
+                          Le mot de passe est requis.
+                        </small>
+                        <small class="text-danger" *ngIf="loginForm.get('password')?.errors?.['minlength']">
+                          Minimum 6 caractères.
+                        </small>
+                      </div>
                       </div>
                       <div class="col-lg-12">
                         <div class="d-flex justify-content-between">
@@ -54,10 +70,11 @@
                           </button>
                         </div>
                     </div>
-                  </form>
+              </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </main>
+</main>
+
