@@ -9,7 +9,7 @@ import {catchError} from "rxjs/operators";
 export class GlobalService {
 
   // public baseUrl = "http://localhost:8080";
-  public baseUrl = 'https://odcactivituy.onrender.com';
+  public baseUrl = 'https://odc-api.onrender.com';
 
   constructor(private http: HttpClient) {}
 
@@ -78,7 +78,7 @@ export class GlobalService {
     formData.append('file', file);
     formData.append('toListeDebut', toListeDebut.toString());
 
-    const url = `http://localhost:8080/etape/${id}/participants/upload`;
+    const url = `https://odcactivituy.onrender.com/etape/${id}/participants/upload`;
     console.log('Appel API à l\'URL :', url);  // Vérifiez l'URL
 
     return this.http.post(url, formData).pipe(

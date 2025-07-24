@@ -11,7 +11,7 @@ import {Utilisateur} from "@core/models/Utilisateur";
 })
 export class AuthService {
   // private BASE_URL = 'http://localhost:8080';
-  private BASE_URL =  'https://odcactivituy.onrender.com' ;
+  private BASE_URL =  'https://odc-api.onrender.com' ;
   currentUserSubject: BehaviorSubject<Utilisateur & { roles: string[] }>;
   public currentUser: Observable<Utilisateur & { roles: string[] }>;
 
