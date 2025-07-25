@@ -28,7 +28,7 @@ export const APP_ROUTE: Route[] = [
             loadComponent: () => import('./admin/entite/entite.component').then(c => c.EntiteComponent)
           },
           {
-            path: 'entiteDetail/:id',
+            path: 'entiteDetail',
             loadComponent: () => import('./admin/entite-detail/entite-detail.component').then(c => c.EntiteDetailComponent)
           },
           {

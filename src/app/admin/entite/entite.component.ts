@@ -78,14 +78,20 @@ export class EntiteComponent {
       this.selectedFile = event.target.files[0];
     }
   }
-  // viewEntiteDetails(entite: Entite): void {
-  //   this.router.navigate([`admin/entiteDetail/${entite.id}`]);
-  // }
 
-  viewEntiteDetails(entite: Entite): void {
+ /* viewEntiteDetails(entite: Entite): void {
     const encryptedId = this.encryptionService.encrypt(entite.id ? entite.id.toString() : '');
     this.router.navigate([`admin/entiteDetail/${encryptedId}`]);
+  }*/
+
+  viewEntiteDetails(entite: Entite): void {
+    this.router.navigate(['/entiteDetail'], {
+      state: { entiteId: entite.id }
+    });
+    console.log("Entite", entite.id)
   }
+
+
   ngOnInit() {
     this.getAllEntite();
     this.getAllUtilisateur();
@@ -107,7 +113,6 @@ export class EntiteComponent {
     this.glogalService.get('entite').subscribe({
       next:(value: Entite[]) =>{
         this.entite = value;
-        console.log("Entite", this.entite)
         this.filteredData = [...value];
 
         // Charger le nombre d'activités pour chaque entité
@@ -123,7 +128,6 @@ export class EntiteComponent {
     this.glogalService.get('utilisateur').subscribe({
       next:(value: Entite[]) =>{
         this.users = value;
-        console.log("Users", this.users)
       }
     })
   }

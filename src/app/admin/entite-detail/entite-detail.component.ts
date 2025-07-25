@@ -66,20 +66,9 @@ export class EntiteDetailComponent {
 
   ngOnInit() {
 
-    // const entiteId = this.route.snapshot.paramMap.get('id');
-    // if (entiteId) {
-    //   this.glogalService.getById('entite', entiteId).subscribe((data: Entite) => {
-    //     console.log(data.responsable?.nom);
-    //     this.entite = data;
-    //     this.selectedUtilisateurId = data.responsable?.id || null;
-    //     this.getAllUtilisateur();
-    //   });
-    // } else {
-    //   this.getAllUtilisateur();
-    // }
     this.getAllTypeActivite();
 
-    const encryptedEntiteId = this.route.snapshot.paramMap.get('id');
+   /* const encryptedEntiteId = this.route.snapshot.paramMap.get('id');
     if (encryptedEntiteId) {
       const decryptedEntiteId = this.encryptionService.decrypt(encryptedEntiteId);
       if (decryptedEntiteId) {
@@ -95,6 +84,28 @@ export class EntiteDetailComponent {
       }
     } else {
       this.getAllUtilisateur();
+    }*/
+    console.log('ngOnInit déclenché dans EntiteDetailComponent');
+
+    const state = history.state;
+    console.log('ID reçu via navigation state:', state);
+
+    const id = state?.entiteId;
+
+    if (id) {
+      this.glogalService.getById('entite', id).subscribe({
+        next: (data: Entite) => {
+          this.entite = data;
+          this.selectedUtilisateurId = data.responsable?.id || null;
+          this.getAllUtilisateur();
+        },
+        error: (err) => {
+          console.error('Erreur lors du chargement de l’entité :', err);
+        }
+      });
+    } else {
+      console.error("Aucun ID d'entité trouvé dans l'état de navigation.");
+      this.back(); // redirection ou message
     }
 
     this.register = this.fb.group({
@@ -110,7 +121,7 @@ export class EntiteDetailComponent {
   }
 
   back(): void {
-    this.router.navigate(['admin/entite']);
+    this.router.navigate(['/entite']);
   }
 
   onFileChange(event: any) {
