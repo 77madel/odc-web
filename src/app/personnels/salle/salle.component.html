@@ -7,7 +7,7 @@
       <a routerLink="/dashboardActivite">
         <i class="fas fa-home font-17"></i></a>
     </li>
-    <li class="breadcrumb-item">Sale</li>
+    <li class="breadcrumb-item">Salle</li>
   </ul>
   <div class="section-body">
     <div class="row clearfix">
@@ -29,7 +29,7 @@
                       <div class="table-search-area">
                         <div>
                           <label for="search-input"><i class="material-icons search-icon">search</i></label>
-                          <input placeholder="Search" type="text" class="browser-default search-field"
+                          <input placeholder="Recherche" type="text" class="browser-default search-field"
                                  (keyup)='filterDatatable($event)' aria-label="Search box">
                         </div>
                       </div>
@@ -119,7 +119,7 @@
                       {{ loadingIndicator ? 'Chargement...' : 'Enregistre' }}
                     </button>
 
-                    <button type="button" class="btn btn-dark text-white" (click)="modal.close('Close click')">Fermé</button>
+                    <button type="button" class="btn btn-dark text-white" (click)="modal.close('Close click')">Fermer</button>
                   </div>
                 </form>
               </div>

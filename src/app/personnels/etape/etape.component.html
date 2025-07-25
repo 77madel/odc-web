@@ -29,7 +29,7 @@
                       <div class="table-search-area">
                         <div>
                           <label for="search-input"><i class="material-icons search-icon">search</i></label>
-                          <input placeholder="Search" type="text" class="browser-default search-field"
+                          <input placeholder="Recherche" type="text" class="browser-default search-field"
                                  (keyup)='filterDatatable($event)' aria-label="Search box">
                         </div>
                       </div>
@@ -96,6 +96,10 @@
                     <button class="btn btn-tbl-edit h-auto" (click)='editRow(row, rowIndex, editRecord)'>
                       <i class="fas fa-pen"></i>
                     </button>
+                    <button class="btn btn-tbl-edit h-auto" (click)='fileUpload(infoModal, row.id, row.nom)'
+                            title="Importer des participants">
+                      <i class="fas fa-upload"></i>
+                    </button>
                     <button class="btn btn-tbl-delete h-auto" (click)='deleteSingleRow(row)'>
                       <i class="far fa-trash-alt"></i>
                     </button>
@@ -160,7 +164,7 @@
                       {{ loadingIndicator ? 'Chargement...' : 'Enregistre' }}
                     </button>
 
-                    <button type="button" class="btn btn-dark text-white" (click)="modal.close('Close click')">Fermé</button>
+                    <button type="button" class="btn btn-dark text-white" (click)="modal.close('Close click')">Fermer</button>
                   </div>
                 </form>
               </div>
@@ -283,10 +287,6 @@
                 </form>
               </div>
             </ng-template>
-
-
-
-
           </div>
         </div>
       </div>

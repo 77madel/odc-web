@@ -7,7 +7,7 @@
       <a routerLink="/dashboard/main">
         <i class="fas fa-home font-17"></i></a>
     </li>
-    <li class="breadcrumb-item">Entite ODC</li>
+    <li class="breadcrumb-item">Entité ODC</li>
   </ul>
 
   <div class="d-flex align-items-center gap-3 fs-5 fw-bold">
@@ -51,12 +51,12 @@
           <p class="card-text mt-2 text-secondary d-flex align-items-center justify-content-between">
             <span>
               Activités :
-              @if (row.id && !activiteCount[row.id]) {
+              @if (row.id && activiteCount[row.id] === undefined) {
                 <div class="spinner-border spinner-border-sm text-warning ms-2" role="status">
                   <span class="visually-hidden">Chargement...</span>
                 </div>
               } @else {
-                <span class="ms-2">{{ row.id ? (activiteCount[row.id] || 'ID non défini') : 'ID non défini' }}</span>
+                <span class="ms-2">{{ row.id ? (activiteCount[row.id] || 0) : 'ID non défini' }}</span>
               }
             </span>
           </p>

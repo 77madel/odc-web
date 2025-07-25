@@ -109,6 +109,9 @@ export class EntiteComponent {
         this.entite = value;
         console.log("Entite", this.entite)
         this.filteredData = [...value];
+
+        // Charger le nombre d'activités pour chaque entité
+        this.loadActiviteCountFromAllActivites();
         setTimeout(() =>{
           this.loadingIndicator = false;
         },500);
@@ -238,6 +241,39 @@ export class EntiteComponent {
 
   deleteRecordSuccess(count: number) {
     this.toastr.error(count + 'Eradication diligente pleinement consommée.', '');
+  }
+
+
+  /**
+   * Alternative : Récupère toutes les activités et compte côté client
+   */
+  loadActiviteCountFromAllActivites(): void {
+    this.glogalService.get('activite').subscribe({
+      next: (activites: any[]) => {
+        // Initialiser le compteur pour toutes les entités à 0
+        this.entite.forEach(entite => {
+          if (entite.id) {
+            this.activiteCount[entite.id] = 0;
+          }
+        });
+
+        // Compter les activités pour chaque entité
+        activites.forEach(activite => {
+          if (activite.entiteId && this.activiteCount.hasOwnProperty(activite.entiteId)) {
+            this.activiteCount[activite.entiteId]++;
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Erreur lors du chargement des activités', err);
+        // Initialiser à 0 en cas d'erreur
+        this.entite.forEach(entite => {
+          if (entite.id) {
+            this.activiteCount[entite.id] = 0;
+          }
+        });
+      }
+    });
   }
 
 

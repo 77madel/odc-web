@@ -267,9 +267,10 @@ export class EtapeComponent {
     Swal.fire({
       title: 'Voulez vous vraiment supprimer?',
       showCancelButton: true,
-      confirmButtonColor: '#8963ff',
+      confirmButtonColor: '#000',
       cancelButtonColor: '#fb7823',
-      confirmButtonText: 'Oui',
+      confirmButtonText: 'Oui, supprimer !',
+      cancelButtonText: "Annuler"
     }).then((result) => {
       if (result.value) {
         this.deleteRecord(row);

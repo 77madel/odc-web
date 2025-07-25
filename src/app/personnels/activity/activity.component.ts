@@ -364,7 +364,8 @@ export class ActivityComponent {
       showCancelButton: true,
       confirmButtonColor: '#8963ff',
       cancelButtonColor: '#fb7823',
-      confirmButtonText: 'Oui',
+      confirmButtonText: 'Oui, supprimer !',
+      cancelButtonText: 'Annuler'
     }).then((result) => {
       if (result.value) {
         this.deleteRecord(row);
@@ -373,7 +374,7 @@ export class ActivityComponent {
     });
   }
 
-  deleteRecord(row: any) {
+ /* deleteRecord(row: any) {
     this.glogalService.delete("activite", row.id!).subscribe({
       next:(response) =>{
         this.activite = response;
@@ -383,29 +384,64 @@ export class ActivityComponent {
         },500);
         this.getAllActivite();
 
-      }, error: (err: { status: number; error: any; message?: string }) => {
-        console.error('Erreur reçue:', err);
-
-        let message = 'Une erreur est survenue. Veuillez réessayer.';
-        let title = '<span class="text-red-500">Échec</span>';
-
-        if (err.error?.message) {
-          message = err.error.message;
-        } else if (err.message) {
-          message = err.message;
-        }
+      },
+      error: (err) => {
+        const msg = this.glogalService.extractMessageFromError(err); // une fonction à extraire le message
 
         Swal.fire({
           icon: 'error',
-          title: title,
-          text: message,
-          confirmButtonText: 'Ok',
-          customClass: {
-            confirmButton: 'bg-red-500 text-white hover:bg-red-600',
-          },
+          title: 'Erreur',
+          text: msg,
+          confirmButtonText: 'OK'
         });
       }
+
     })
+  }*/
+
+  deleteRecord(row: any) {
+    // Activer le loading pendant la suppression
+    this.loadingIndicator = true;
+
+    this.glogalService.delete("activite", row.id!).subscribe({
+      next: (response: any) => {
+        console.log('Réponse de suppression:', response);
+
+        // Succès de la suppression
+        Swal.fire({
+          icon: 'success',
+          title: 'Supprimé !',
+          text: 'L\'activité a été supprimée avec succès.',
+          timer: 2000,
+          showConfirmButton: false
+        });
+
+        // Recharger la liste des activités
+        this.getAllActivite();
+
+        // Désactiver le loading après un délai
+        setTimeout(() => {
+          this.loadingIndicator = false;
+        }, 500);
+      },
+      error: (err) => {
+        console.log('Erreur de suppression:', err);
+
+        // Extraire le message d'erreur
+        const msg = this.glogalService.extractMessageFromError(err);
+
+        // Désactiver le loading en cas d'erreur
+        this.loadingIndicator = false;
+
+        // Afficher l'erreur
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur de suppression',
+          text: msg,
+          confirmButtonText: 'OK'
+        });
+      }
+    });
   }
 
 
